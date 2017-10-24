@@ -5,8 +5,8 @@ API for collecting and serving temperature data
   id  
   name  
   description 
-  sensors
-  switches
+  sensors  
+  switches  
   
 ```
 /api/places/:id
