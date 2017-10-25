@@ -13,8 +13,7 @@ API for collecting and serving temperature data
 {
   "name" : "Haapsalu",
   "description" : "Haapsalu maja",
-  "sensors" : [id, id, id],
-  "switches" : [id, id, id]
+  "dateCreated" : date.now()
 }
 
 /api/places/:id/sensors
@@ -42,7 +41,8 @@ API for collecting and serving temperature data
   "name" : "1_korrus",
   "description" : "1. korruse elutoa andur",
   "temperature" : 22.5,
-  "dateMeasured" : ...
+  "dateMeasured" : ...,
+  "placeId": ...
 }
 
 ```
@@ -61,7 +61,8 @@ API for collecting and serving temperature data
   "name" : "1_korrus",
   "description" : "1. korruse elutoa radiaatori lüliti",
   "state" : true,
-  "dateSwitched" : ...
+  "dateSwitched" : ...,
+  "placeId": ...
 }
 
 ```
