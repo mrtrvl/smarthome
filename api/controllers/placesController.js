@@ -1,18 +1,38 @@
 'use strict';
 
+let mongoose = require('mongoose');
+let Place = mongoose.model('Place');
 
 exports.allPlaces = (req, res) => {
-    res.send('AllPlaces');
+    Place.find({}, (err, place) => {
+        if (err){
+            res.send(err);
+        } else {
+            res.json(place);
+        }
+    });
 };
 
-exports.createaPlace = (req, res) => {
-    res.send('CreatePlace')
+exports.createPlace = (req, res) => {
+    let newPlace = new Place(req.body);
+    newPlace.save((err, place) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(place);
+        }
+    });
 };
 
 exports.getPlace = (req, res) => {
-    console.log(req.params);
-    let id = req.params.id;
-    res.send(`GetPlace id:${id}`);
+    let placeId = req.params.placeId;
+    Place.findById(placeId, (err, place) => {
+        if(err){
+            res.send(err);
+        } else {
+            res.json(place);
+        }
+    });
 };
 
 exports.updatePlace = (req, res) => {
