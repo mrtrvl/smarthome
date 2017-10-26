@@ -17,7 +17,10 @@ module.exports = (app) => {
         .get(sensors.allSensors)
         .post(sensors.createSensor);
         
-    app.route('/api/places/:sensorId')
+    app.route('/api/sensors/:sensorId')
         .get(sensors.getSensor)
         .put(sensors.updateSensor);
+
+    app.route('/api/places/:placeId/sensors')
+        .get(sensors.allSensorsInPlace);
 };

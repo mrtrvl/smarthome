@@ -4,6 +4,7 @@ let mongoose = require('mongoose');
 const port = 3000;
 
 let Place = require('./api/models/placesModel');
+let Sensor = require('./api/models/sensorsModel');
 let bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({extended: true}));

@@ -14,12 +14,25 @@ exports.allPlaces = (req, res) => {
 };
 
 exports.createPlace = (req, res) => {
+
     let newPlace = new Place(req.body);
-    newPlace.save((err, place) => {
+    let placeName = req.body.name;
+
+    Place.findOne({"name" : placeName}, (err, place) => {
         if (err) {
             res.send(err);
         } else {
-            res.json(place);
+            if (place != null){
+                res.send(`Place named "${placeName}" already exists`);
+            } else {
+                newPlace.save((err, place) => {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        res.json(place);
+                    }
+                });
+            }
         }
     });
 };

@@ -15,7 +15,7 @@ let SensorSchema = new Schema ({
         type: Date,
         default: Date.now
     },
-    PlaceId: {
+    placeId: {
         type: String,
         required: 'Enter the place id'
     }
