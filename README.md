@@ -147,11 +147,9 @@ API for collecting and serving temperature data
 /api/temperatures/
 {
   "_id":"59f0a40916348c0e6d5b4ff8",
-  "sensorId":"59f0a40916348c0e6d5b4ff8",,
+  "sensorId":"59f0a40916348c0e6d5b4ff8",
   "temperature" : "22.5",
   "dateMeasured" : "2017-10-25T18:52:00.479Z"
 }
-
-/api/switches/
 
 ```
