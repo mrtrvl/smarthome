@@ -5,6 +5,8 @@ const port = 3000;
 
 let Place = require('./api/models/placesModel');
 let Sensor = require('./api/models/sensorsModel');
+let Temperature = require('./api/models/temperaturesModel');
+
 let bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({extended: true}));

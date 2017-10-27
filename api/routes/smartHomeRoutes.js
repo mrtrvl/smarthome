@@ -29,7 +29,4 @@ module.exports = (app) => {
         app.route('/api/temperatures')
             .get(temperatures.allTemperatures)
             .post(temperatures.createTemperature);
-                
-        app.route('/api/temperatures/:sensorId')
-            .get(temperatures.getTemperatures);
 };

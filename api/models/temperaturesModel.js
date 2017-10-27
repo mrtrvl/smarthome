@@ -8,7 +8,7 @@ let TemperatureSchema = new Schema ({
         required: 'Enter the id of the sensor'
     },
     temperature: {
-        type: number,
+        type: Number,
         required: 'Enter the temperature for sensor'
     },
     measuredDate: {
