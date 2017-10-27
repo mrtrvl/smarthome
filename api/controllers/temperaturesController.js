@@ -13,6 +13,17 @@ exports.allTemperatures = (req, res) => {
     });
 };
 
+exports.temperaturesFromSensor = (req, res) => {
+    let sensorId = req.params.sensorId;
+    Temperature.find({"sensorId": sensorId}, (err, temperature) => {
+        if (err){
+            res.send(err);
+        } else {
+            res.json(temperature);
+        }
+    });
+};
+
 exports.createTemperature = (req, res) => {
     let newTemperature = new Temperature(req.body);
     
