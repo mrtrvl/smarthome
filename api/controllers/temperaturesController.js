@@ -14,7 +14,6 @@ exports.allTemperatures = (req, res) => {
 };
 
 exports.createTemperature = (req, res) => {
-    
     let newTemperature = new Temperature(req.body);
     
     newTemperature.save((err, temperature) => {

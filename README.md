@@ -9,6 +9,7 @@ API for collecting and serving temperature data
   switches  
   
 ```
+GET
 /api/places/:id
 {
   "_id":"59f05fc439b19d097ba37712",
@@ -18,6 +19,7 @@ API for collecting and serving temperature data
   "__v":0
 }
 
+GET
 /api/places/
 [
   {
@@ -36,7 +38,7 @@ API for collecting and serving temperature data
   }
 ]
 
-
+GET
 /api/places/:id/sensors
 [
   {
@@ -57,11 +59,13 @@ API for collecting and serving temperature data
   }
 ]
 
+GET
 /api/places/:id/switches
 {
   
 }
 
+GET
 /api/places/:id/temperatures
 {
   
@@ -77,6 +81,7 @@ API for collecting and serving temperature data
   createdDate  
 
 ```
+GET
 /api/sensors/:id
 {
   "_id":"59f0a40916348c0e6d5b4ff8",
@@ -87,6 +92,7 @@ API for collecting and serving temperature data
   "__v":0  
 }
 
+GET
 /api/sensors/
 [
   {
@@ -107,6 +113,7 @@ API for collecting and serving temperature data
   }
 ]
 
+GET
 /api/sensors/:id/temperatures
 {
   
@@ -119,19 +126,21 @@ API for collecting and serving temperature data
   name  
   description  
   state  
-  dateCreated  
+  createdDate  
   
 
 ```
+GET
 /api/switches/:id
 {
   "name" : "1_korrus",
   "description" : "1. korruse elutoa radiaatori lüliti",
   "state" : true,
-  "dateCreated" : ...,
+  "createdDate" : ...,
   "placeId": ...
 }
 
+GET
 /api/switches/
 
 ```
@@ -140,16 +149,26 @@ API for collecting and serving temperature data
   id  
   sensorId  
   temperature  
-  dateMeasured    
+  measuredDate    
   
 
 ```
+GET
 /api/temperatures/
-{
-  "_id":"59f0a40916348c0e6d5b4ff8",
-  "sensorId":"59f0a40916348c0e6d5b4ff8",
-  "temperature" : "22.5",
-  "dateMeasured" : "2017-10-25T18:52:00.479Z"
-}
+[
+  {
+    "_id":"59f2d0876b9f4662da3ac0b7",
+    "sensorId":"59f0df1a2ba14011a185d0bd",
+    "temperature":20.5,
+    "measuredDate":"2017-10-27T06:21:59.959Z",
+    "__v":0
+  },
+  {
+    "_id":"59f2d0a86b9f4662da3ac0b8",
+    "sensorId":"59f0df1a2ba14011a185d0bd",
+    "temperature":21.5,
+    "measuredDate":"2017-10-27T06:22:32.706Z",
+    "__v":0,
+  }
 
 ```
