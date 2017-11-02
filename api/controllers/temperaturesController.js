@@ -24,6 +24,17 @@ exports.temperaturesFromSensor = (req, res) => {
     });
 };
 
+exports.getLastTemperatureFromSensor = (req, res) => {
+    let sensorId = req.params.sensorId;
+    Temperature.find({"sensorId": sensorId}, (err, temperature) => {
+        if (err){
+            res.send(err);
+        } else {
+            res.json(temperature);
+        }
+    }).sort({_id:-1}).limit(1);
+};
+
 exports.createTemperature = (req, res) => {
     let newTemperature = new Temperature(req.body);
     

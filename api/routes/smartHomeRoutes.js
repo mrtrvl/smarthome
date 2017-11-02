@@ -32,4 +32,7 @@ module.exports = (app) => {
         
         app.route('/api/sensors/:sensorId/temperatures')
             .get(temperatures.temperaturesFromSensor);
+
+        app.route('/api/sensors/:sensorId/temperature')
+            .get(temperatures.getLastTemperatureFromSensor);
 };

@@ -172,3 +172,7 @@ GET
   }
 
 ```
+
+
+## Rescources  
+https://enable-cors.org/server_expressjs.html

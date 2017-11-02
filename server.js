@@ -12,8 +12,14 @@ let bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://10.10.10.86/smartHome').then(
+mongoose.connect('mongodb://localhost/smartHome').then(
     () => {
         console.log(`Connected to database`);
     },
