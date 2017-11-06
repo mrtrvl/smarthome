@@ -30,7 +30,10 @@ module.exports = (app) => {
             .get(temperatures.allTemperatures)
             .post(temperatures.createTemperature);
         
-        app.route('/api/sensors/:sensorId/temperatures')
+        app.route('/api/sensors/:sensorId/temperatures/:count')
+            .get(temperatures.temperaturesFromSensor);
+
+        app.route('/api/sensors/:sensorId/temperatures/')
             .get(temperatures.temperaturesFromSensor);
 
         app.route('/api/sensors/:sensorId/temperature')
