@@ -22,9 +22,7 @@ exports.createPlace = (req, res) => {
         if (err) {
             res.send(err);
         } else {
-            if (place != null){
-                res.send(`Place named "${placeName}" already exists`);
-            } else {
+            if (!place){
                 newPlace.save((err, place) => {
                     if (err) {
                         res.send(err);
@@ -32,6 +30,8 @@ exports.createPlace = (req, res) => {
                         res.json(place);
                     }
                 });
+            } else {
+                res.send(`Place named "${placeName}" already exists`);
             }
         }
     });
@@ -49,6 +49,21 @@ exports.getPlace = (req, res) => {
 };
 
 exports.updatePlace = (req, res) => {
-    let id = req.params.id;
-    res.send(`UpdatePlace id:${id}`);
+    let placeId = req.params.placeId;
+    Place.findById(placeId, (err, place) => {
+        if(err){
+            res.send(err);
+        } else {
+            place.name = req.body.name || place.name;
+            place.description = req.body.description || place.description;
+
+            place.save((err, place) => {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.json(place);
+                }
+            });
+        }
+    });
 };

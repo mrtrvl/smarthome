@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const port = 3000;
 
-let Place = require('./api/models/placesModel');
-let Sensor = require('./api/models/sensorsModel');
-let Temperature = require('./api/models/temperaturesModel');
+const Place = require('./api/models/placesModel');
+const Sensor = require('./api/models/sensorsModel');
+const Temperature = require('./api/models/temperaturesModel');
 
-let bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

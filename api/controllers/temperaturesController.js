@@ -16,7 +16,6 @@ exports.allTemperatures = (req, res) => {
 exports.temperaturesFromSensor = (req, res) => {
     let sensorId = req.params.sensorId;
     let count = req.params.count;
-    console.log(count);
     if (isNaN(count)) {
         count = 10;
     };
@@ -26,7 +25,7 @@ exports.temperaturesFromSensor = (req, res) => {
         } else {
             res.json(temperature);
         }
-    }).limit(count);
+    }).sort({_id:-1}).limit(count);
 };
 
 exports.getLastTemperatureFromSensor = (req, res) => {
