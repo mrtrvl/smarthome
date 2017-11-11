@@ -2,14 +2,14 @@
 const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let SwitcheSchema = new Schema ({
+let RealysSchema = new Schema ({
     name: {
         type: String,
-        required: 'Enter the new name of the switch'
+        required: 'Enter the new name of the relay'
     },
     description: {
         type: String,
-        required: 'Enter the description for the switch'
+        required: 'Enter the description for the relay'
     },
     createdDate: {
         type: Date,
@@ -21,4 +21,4 @@ let SwitcheSchema = new Schema ({
     }
 });
 
-module.exports = mongoose.model('Sensor', SwitcheSchema);
+module.exports = mongoose.model('Relay', RealysSchema);
