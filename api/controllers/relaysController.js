@@ -1,55 +1,55 @@
 'use strict';
 
 let mongoose = require('mongoose');
-let Switch = mongoose.model('Switch');
+let Relay = mongoose.model('Relay');
 
-exports.allSwitches = (req, res) => {
-    Switch.find({}, (err, switch) => {
+exports.allRelays = (req, res) => {
+    Relay.find({}, (err, relay) => {
         if (err){
             res.send(err);
         } else {
-            res.json(Switch);
+            res.json(Relay);
         }
     });
 };
 
-exports.allSwitchsInPlace = (req, res) => {
+exports.allRelaysInPlace = (req, res) => {
     let placeId = req.params.placeId;
-    Switch.find({"placeId": placeId}, (err, switch) => {
+    Relay.find({"placeId": placeId}, (err, relay) => {
         if (err){
             res.send(err);
         } else {
-            res.json(switch);
+            res.json(relay);
         }
     });
 };
 
-exports.createSwitch = (req, res) => {
+exports.createRelay = (req, res) => {
     
-    let newSwitch = new Switch(req.body);
-    let switchName = req.body.name;
+    let newRelay = new Relay(req.body);
+    let relayName = req.body.name;
     
-    newSwitch.save((err, switch) => {
+    newRelay.save((err, relay) => {
         if (err) {
             res.send(err);
         } else {
-            res.json(switch);
+            res.json(relay);
         }
     });
 };
 
-exports.getSwitch = (req, res) => {
-    let switchId = req.params.switchId;
-    Switch.findById(switchId, (err, switch) => {
+exports.getRelay = (req, res) => {
+    let relayId = req.params.relayId;
+    Relay.findById(relayId, (err, relay) => {
         if(err){
             res.send(err);
         } else {
-            res.json(switch);
+            res.json(relay);
         }
     });
 };
 
-exports.updateSwitch = (req, res) => {
+exports.updateRelay = (req, res) => {
     let id = req.params.id;
-    res.send(`UpdateSwitch id:${id}`);
+    res.send(`UpdateRelay id:${id}`);
 };

@@ -24,6 +24,19 @@ module.exports = (app) => {
     app.route('/api/places/:placeId/sensors')
         .get(sensors.allSensorsInPlace);
 
+    let relays = require('../controllers/relaysController');
+    
+        app.route('/api/relays')
+            .get(relays.allRelays)
+            .post(relays.createRelay);
+            
+        app.route('/api/relays/:sensorId')
+            .get(relays.getRelay)
+            .put(relays.updateRelay);
+    
+        app.route('/api/places/:placeId/relays')
+            .get(relays.allRelaysInPlace);
+
     let temperatures = require('../controllers/temperaturesController');
         
         app.route('/api/temperatures')
