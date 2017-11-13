@@ -1,7 +1,7 @@
 'use strict';
 
-let mongoose = require('mongoose');
-let Relay = mongoose.model('Relay');
+const mongoose = require('mongoose');
+const Relay = mongoose.model('Relay');
 
 exports.allRelays = (req, res) => {
     Relay.find({}, (err, relay) => {

@@ -1,7 +1,7 @@
 'use strict';
 
-let mongoose = require('mongoose');
-let Temperature = mongoose.model('Temperature');
+const mongoose = require('mongoose');
+const Temperature = mongoose.model('Temperature');
 
 exports.allTemperatures = (req, res) => {
     Temperature.find({}, (err, temperature) => {

@@ -1,7 +1,7 @@
 'use strict';
 
-let mongoose = require('mongoose');
-let Sensor = mongoose.model('Sensor');
+const mongoose = require('mongoose');
+const Sensor = mongoose.model('Sensor');
 
 exports.allSensors = (req, res) => {
     Sensor.find({}, (err, sensor) => {

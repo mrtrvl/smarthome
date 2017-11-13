@@ -1,7 +1,7 @@
 'use strict';
 
-let mongoose = require('mongoose');
-let Place = mongoose.model('Place');
+const mongoose = require('mongoose');
+const Place = mongoose.model('Place');
 
 exports.allPlaces = (req, res) => {
     Place.find({}, (err, place) => {
