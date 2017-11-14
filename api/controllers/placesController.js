@@ -1,5 +1,3 @@
-'use strict';
-
 const mongoose = require('mongoose');
 const Place = mongoose.model('Place');
 
@@ -9,6 +7,7 @@ exports.allPlaces = async (req, res) => {
         const places = await Place.find({});
         res.json(places);
     } catch (err) {
+        res.send(`Something wrong happened! :(`);
         console.error(err);
     } 
 };
@@ -30,8 +29,6 @@ exports.createPlace = async (req, res) => {
     }
 };
 
-
-
 exports.getPlace = async (req, res) => {
 
     const placeId = req.params.placeId;
@@ -43,7 +40,6 @@ exports.getPlace = async (req, res) => {
         console.error(err);
     }
 };
-
 
 exports.updatePlace = async (req, res) => {
 
