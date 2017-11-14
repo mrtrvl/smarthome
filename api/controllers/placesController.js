@@ -3,67 +3,65 @@
 const mongoose = require('mongoose');
 const Place = mongoose.model('Place');
 
-exports.allPlaces = (req, res) => {
-    Place.find({}, (err, place) => {
-        if (err){
-            res.send(err);
-        } else {
-            res.json(place);
-        }
-    });
+exports.allPlaces = async (req, res) => {
+    
+    try {
+        const places = await Place.find({});
+        res.json(places);
+    } catch (err) {
+        console.error(err);
+    } 
 };
 
-exports.createPlace = (req, res) => {
+exports.createPlace = async (req, res) => {
 
-    let newPlace = new Place(req.body);
-    let placeName = req.body.name;
+    const newPlace = new Place(req.body);
 
-    Place.findOne({"name" : placeName}, (err, place) => {
-        if (err) {
-            res.send(err);
+    try {
+        const place = await Place.findOne({ 'name' : newPlace.name });
+        if (place) {
+            res.send(`Place named "${newPlace.name}" already exists`);
         } else {
-            if (!place){
-                newPlace.save((err, place) => {
-                    if (err) {
-                        res.send(err);
-                    } else {
-                        res.json(place);
-                    }
-                });
-            } else {
-                res.send(`Place named "${placeName}" already exists`);
-            }
+            newPlace.save(newPlace);
+            res.json(newPlace);
         }
-    });
+    } catch (err) {
+        console.error(err);
+    }
 };
 
-exports.getPlace = (req, res) => {
-    let placeId = req.params.placeId;
-    Place.findById(placeId, (err, place) => {
-        if(err){
-            res.send(err);
-        } else {
-            res.json(place);
-        }
-    });
+
+
+exports.getPlace = async (req, res) => {
+
+    const placeId = req.params.placeId;
+
+    try {
+        const place = Place.findById(placeId);
+        res.json(place);
+    } catch (err){
+        console.error(err);
+    }
 };
 
-exports.updatePlace = (req, res) => {
-    let placeId = req.params.placeId;
-    Place.findById(placeId, (err, place) => {
-        if(err){
-            res.send(err);
-        } else {
-            place.name = req.body.name || place.name;
-            place.description = req.body.description || place.description;
 
-            place.save((err, place) => {
-                if (err) {
-                    res.send(err);
-                } else {
-                    res.json(place);
-                }
-            });
+exports.updatePlace = async (req, res) => {
+
+    const placeId = req.params.placeId;
+    const updatedPlace = req.body;
+
+    try {
+        let placeToUpdate = await Place.findById(placeId);
+        if (placeToUpdate) {
+            placeToUpdate.name = updatedPlace.name || placeToUpdate.name;
+            placeToUpdate.description = updatedPlace.description || placeToUpdate.description;
+            placeToUpdate.save(placeToUpdate);
+            res.json(placeToUpdate);
+        } else {
+            res.send(`Place with id: ${placeId} not found!`);
         }
-    });
+    } catch (err) {
+        res.send(`Something wrong happened! :(`);
+        console.error(err);
+    }
 };
