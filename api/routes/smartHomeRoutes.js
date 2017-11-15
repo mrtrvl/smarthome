@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = (app) => {
     let places = require('../controllers/placesController');
 

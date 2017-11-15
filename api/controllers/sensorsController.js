@@ -1,5 +1,3 @@
-import { ENGINE_METHOD_NONE } from 'constants';
-
 const mongoose = require('mongoose');
 const Sensor = mongoose.model('Sensor');
 
@@ -14,7 +12,7 @@ exports.allSensors = async (req, res) => {
 
 exports.allSensorsInPlace = async (req, res) => {
     try {
-        const placeId = req.params.placeId;
+        const { placeId } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(placeId)) {
             throw new Error('No proper place id specified!');
@@ -52,8 +50,8 @@ exports.createSensor = async (req, res) => {
 
 exports.getSensor = async (req, res) => {
     try {
-        const sensorId = req.params.sensorId;
-        console.log(sensorId);
+        const { sensorId } = req.params;
+
         if (!mongoose.Types.ObjectId.isValid(sensorId)) {
             throw new Error('No proper sensor id specified!');
         }

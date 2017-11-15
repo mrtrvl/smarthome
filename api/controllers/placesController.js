@@ -36,7 +36,7 @@ exports.createPlace = async (req, res) => {
 exports.getPlace = async (req, res) => {
 
     try {
-        const placeId = req.params.placeId;
+        const { placeId } = req.params;
         if (!mongoose.Types.ObjectId.isValid(placeId)) {
             throw new Error('No proper place id specified!');
         }
@@ -55,7 +55,7 @@ exports.getPlace = async (req, res) => {
 exports.updatePlace = async (req, res) => {
 
     try {
-        const placeId = req.params.placeId;
+        const { placeId } = req.params;
         if (!mongoose.Types.ObjectId.isValid(placeId) || !placeId) {
             throw new Error('No proper id specified!');
         }
