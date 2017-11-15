@@ -7,57 +7,77 @@ exports.allPlaces = async (req, res) => {
         const places = await Place.find({});
         res.json(places);
     } catch (err) {
-        res.send(`Something wrong happened! :(`);
-        console.error(err);
+        res.status(400).send(err);
     } 
 };
 
 exports.createPlace = async (req, res) => {
-
-    const newPlace = new Place(req.body);
-
     try {
-        const place = await Place.findOne({ 'name' : newPlace.name });
-        if (place) {
-            res.send(`Place named "${newPlace.name}" already exists`);
-        } else {
-            newPlace.save(newPlace);
-            res.json(newPlace);
+        const {name, description} = req.body;
+
+        if(!name || !description){
+            throw new Error('Name or description is missing!');
         }
+
+        const place = await Place.findOne({ name: name });
+        if (place) {
+            throw new Error(`Place ${name} already exists`);
+        }
+
+        const newPlace = new Place({name, description});
+        await newPlace.save();
+        res.status(210).send(newPlace);
+
     } catch (err) {
-        console.error(err);
+        res.status(400).send(err.message);
     }
 };
 
 exports.getPlace = async (req, res) => {
 
-    const placeId = req.params.placeId;
-
     try {
-        const place = Place.findById(placeId);
-        res.json(place);
+        const placeId = req.params.placeId;
+        if (!mongoose.Types.ObjectId.isValid(placeId)) {
+            throw new Error('No proper id specified!');
+        }
+
+        const place = await Place.findById(placeId);
+        if(!place) {
+            throw new Error('No place found!');
+        }
+        res.status(200).send(place);
+
     } catch (err){
-        console.error(err);
+        res.status(400).send(err.message);
     }
 };
 
 exports.updatePlace = async (req, res) => {
 
-    const placeId = req.params.placeId;
-    const updatedPlace = req.body;
-
     try {
-        let placeToUpdate = await Place.findById(placeId);
-        if (placeToUpdate) {
-            placeToUpdate.name = updatedPlace.name || placeToUpdate.name;
-            placeToUpdate.description = updatedPlace.description || placeToUpdate.description;
-            placeToUpdate.save(placeToUpdate);
-            res.json(placeToUpdate);
-        } else {
-            res.send(`Place with id: ${placeId} not found!`);
+        const placeId = req.params.placeId;
+        if (!mongoose.Types.ObjectId.isValid(placeId)) {
+            throw new Error('No proper id specified!');
         }
+
+        const {name, description} = req.body;
+        if (!name && !description) {
+            throw new Error('No fields specified!');
+        }
+
+        let placeToUpdate = await Place.findById(placeId);
+        if (!placeToUpdate) {
+            throw new Error(`Place with id: ${placeId} not found!`);
+        }
+
+        placeToUpdate.name = name || placeToUpdate.name;
+        placeToUpdate.description = description || placeToUpdate.description;
+        placeToUpdate.save();
+
+        res.status(210).send(placeToUpdate);
+        
     } catch (err) {
-        res.send(`Something wrong happened! :(`);
         console.error(err);
+        res.status(400).send(err.message);
     }
 };
