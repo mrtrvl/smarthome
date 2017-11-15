@@ -1,55 +1,71 @@
-'use strict';
+import { ENGINE_METHOD_NONE } from 'constants';
 
 const mongoose = require('mongoose');
 const Sensor = mongoose.model('Sensor');
 
-exports.allSensors = (req, res) => {
-    Sensor.find({}, (err, sensor) => {
-        if (err){
-            res.send(err);
-        } else {
-            res.json(sensor);
-        }
-    });
+exports.allSensors = async (req, res) => {
+    try {
+        const sensors = await Sensor.find({});
+        res.status(200).send(sensors);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 };
 
-exports.allSensorsInPlace = (req, res) => {
-    let placeId = req.params.placeId;
-    Sensor.find({"placeId": placeId}, (err, sensor) => {
-        if (err){
-            res.send(err);
-        } else {
-            res.json(sensor);
+exports.allSensorsInPlace = async (req, res) => {
+    try {
+        const placeId = req.params.placeId;
+
+        if (!mongoose.Types.ObjectId.isValid(placeId)) {
+            throw new Error('No proper place id specified!');
         }
-    });
+
+        const sensors = await Sensor.find({"placeId": placeId});
+        res.status(200).send(sensors);
+
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 };
 
-exports.createSensor = (req, res) => {
+exports.createSensor = async (req, res) => {
     
-    let newSensor = new Sensor(req.body);
-    let sensorName = req.body.name;
-    
-    newSensor.save((err, sensor) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(sensor);
+    try {
+        const { name, description, placeId } = req.body;
+        if (!name || !description || !placeId) {
+            throw new Error('Some fields are not specified!');
         }
-    });
+
+        if (!mongoose.Types.ObjectId.isValid(placeId)) {
+            throw new Error('No proper place id specified!');
+        }
+
+        const newSensor = new Sensor({placeId, name, description});
+
+        await newSensor.save();
+        res.status(200).send(newSensor);
+
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 };
 
-exports.getSensor = (req, res) => {
-    let sensorId = req.params.sensorId;
-    Sensor.findById(sensorId, (err, sensor) => {
-        if(err){
-            res.send(err);
-        } else {
-            res.json(sensor);
+exports.getSensor = async (req, res) => {
+    try {
+        const sensorId = req.params.sensorId;
+        console.log(sensorId);
+        if (!mongoose.Types.ObjectId.isValid(sensorId)) {
+            throw new Error('No proper sensor id specified!');
         }
-    });
+
+        const sensor = await Sensor.findById(sensorId);
+
+        res.status(200).send(sensor);
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 };
 
 exports.updateSensor = (req, res) => {
-    let id = req.params.id;
-    res.send(`UpdateSensor id:${id}`);
+    //TODO
 };

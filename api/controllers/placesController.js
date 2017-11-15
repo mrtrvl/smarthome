@@ -5,7 +5,7 @@ exports.allPlaces = async (req, res) => {
     
     try {
         const places = await Place.find({});
-        res.json(places);
+        res.status(200).send(places);
     } catch (err) {
         res.status(400).send(err);
     } 
@@ -38,7 +38,7 @@ exports.getPlace = async (req, res) => {
     try {
         const placeId = req.params.placeId;
         if (!mongoose.Types.ObjectId.isValid(placeId)) {
-            throw new Error('No proper id specified!');
+            throw new Error('No proper place id specified!');
         }
 
         const place = await Place.findById(placeId);
@@ -56,7 +56,7 @@ exports.updatePlace = async (req, res) => {
 
     try {
         const placeId = req.params.placeId;
-        if (!mongoose.Types.ObjectId.isValid(placeId)) {
+        if (!mongoose.Types.ObjectId.isValid(placeId) || !placeId) {
             throw new Error('No proper id specified!');
         }
 
@@ -72,10 +72,10 @@ exports.updatePlace = async (req, res) => {
 
         placeToUpdate.name = name || placeToUpdate.name;
         placeToUpdate.description = description || placeToUpdate.description;
-        placeToUpdate.save();
+        await placeToUpdate.save();
 
         res.status(210).send(placeToUpdate);
-        
+
     } catch (err) {
         console.error(err);
         res.status(400).send(err.message);
