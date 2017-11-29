@@ -14,6 +14,9 @@ let PlaceSchema = new Schema ({
     createdDate: {
         type: Date,
         default: Date.now
+    },
+    ipAddress: {
+        type: String
     }
 });
 
