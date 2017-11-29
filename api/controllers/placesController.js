@@ -60,7 +60,7 @@ exports.updatePlace = async (req, res) => {
             throw new Error('No proper id specified!');
         }
 
-        const  { name, description, ipAddress } = req.body;
+        const  { name, description, ipAddress, diskSize, diskFree } = req.body;
 
         let placeToUpdate = await Place.findById(placeId);
         if (!placeToUpdate) {
@@ -70,7 +70,10 @@ exports.updatePlace = async (req, res) => {
         placeToUpdate.name = name || placeToUpdate.name;
         placeToUpdate.description = description || placeToUpdate.description;
         placeToUpdate.ipAddress = ipAddress || placeToUpdate.ipAddress;
-        console.log(`IP: ${ ipAddress }`);
+        placeToUpdate.diskSize = diskSize || placeToUpdate.diskSize;
+        placeToUpdate.diskFree = diskFree || placeToUpdate.diskFree;
+        placeToUpdate.updatedDate = Date.now();
+
         await placeToUpdate.save();
 
         res.status(210).send(placeToUpdate);
