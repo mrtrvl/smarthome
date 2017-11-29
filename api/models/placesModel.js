@@ -14,6 +14,18 @@ let PlaceSchema = new Schema ({
     createdDate: {
         type: Date,
         default: Date.now
+    },
+    ipAddress: {
+        type: String
+    },
+    updatedDate: {
+        type: Date
+    },
+    diskSize: {
+        type: Number
+    },
+    diskFree: {
+        type: Number
     }
 });
 

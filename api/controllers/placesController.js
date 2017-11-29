@@ -21,7 +21,7 @@ exports.createPlace = async (req, res) => {
 
         const place = await Place.findOne({ name: name });
         if (place) {
-            throw new Error(`Place ${name} already exists`);
+            throw new Error(`Place ${ name } already exists`);
         }
 
         const newPlace = new Place({name, description});
@@ -60,18 +60,20 @@ exports.updatePlace = async (req, res) => {
             throw new Error('No proper id specified!');
         }
 
-        const {name, description} = req.body;
-        if (!name && !description) {
-            throw new Error('No fields specified!');
-        }
+        const  { name, description, ipAddress, diskSize, diskFree } = req.body;
 
         let placeToUpdate = await Place.findById(placeId);
         if (!placeToUpdate) {
-            throw new Error(`Place with id: ${placeId} not found!`);
+            throw new Error(`Place with id: ${ placeId } not found!`);
         }
 
         placeToUpdate.name = name || placeToUpdate.name;
         placeToUpdate.description = description || placeToUpdate.description;
+        placeToUpdate.ipAddress = ipAddress || placeToUpdate.ipAddress;
+        placeToUpdate.diskSize = diskSize || placeToUpdate.diskSize;
+        placeToUpdate.diskFree = diskFree || placeToUpdate.diskFree;
+        placeToUpdate.updatedDate = Date.now();
+
         await placeToUpdate.save();
 
         res.status(210).send(placeToUpdate);
