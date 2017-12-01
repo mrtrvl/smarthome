@@ -42,7 +42,6 @@ exports.createRelay = (req, res) => {
 exports.getRelay = async (req, res) => {
     try {
         const { relayId } = req.params;
-        console.log(`Relay ID: ${ relayId }`)
         const relay = await Relay.findById(relayId);
         if(!relay) {
             throw new Error('No relay found!');

@@ -52,10 +52,4 @@ module.exports = (app) => {
 
         app.route('/api/sensors/:sensorId/temperature')
             .get(temperatures.getLastTemperatureFromSensor);
-
-    let relayActions = require('../controllers/relayActionsController');
-
-        app.route('/api/relaystates/')
-            .get(relayActions.allRelayActions)
-            .post(relayActions.updateRelayState);
 };
