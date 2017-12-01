@@ -18,6 +18,13 @@ let RealysSchema = new Schema ({
     placeId: {
         type: String,
         required: 'Enter the place id'
+    },
+    switchedOn: {
+        type: Boolean,
+        default: false
+    },
+    switchedDate: {
+        type: Date
     }
 });
 

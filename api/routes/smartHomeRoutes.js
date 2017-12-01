@@ -27,13 +27,16 @@ module.exports = (app) => {
         app.route('/api/relays')
             .get(relays.allRelays)
             .post(relays.createRelay);
-            
-        app.route('/api/relays/:sensorId')
+         
+        app.route('/api/relays/:relayId')
+            .post(relays.updateRelayState);
+
+        app.route('/api/relays/:relayId')
             .get(relays.getRelay)
             .put(relays.updateRelay);
     
-        app.route('/api/places/:placeId/relays')
-            .get(relays.allRelaysInPlace);
+/*         app.route('/api/places/:placeId/relays')
+            .get(relays.allRelaysInPlace); */
 
     let temperatures = require('../controllers/temperaturesController');
         
