@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let RealysSchema = new Schema ({
+const RealysSchema = new Schema ({
     name: {
         type: String,
         required: 'Enter the new name of the relay'

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let SensorSchema = new Schema ({
+const SensorSchema = new Schema ({
     name: {
         type: String,
         required: 'Enter the new name of the sensor'

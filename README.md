@@ -178,3 +178,4 @@ GET
 https://enable-cors.org/server_expressjs.html  
 https://raspberrypi.stackexchange.com/questions/48303/install-nodejs-for-all-raspberry-pi - installing node and npm on raspberry pi  
 
+https://www.codementor.io/olatundegaruba/5-steps-to-authenticating-node-js-with-jwt-7ahb5dmyr
