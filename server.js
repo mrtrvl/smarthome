@@ -7,7 +7,8 @@ const Place = require('./api/models/placesModel');
 const Sensor = require('./api/models/sensorsModel');
 const Relay = require('./api/models/relaysModel');
 const Temperature = require('./api/models/temperaturesModel');
-const RelayActions = require('./api/models/relayActionsModel');
+const User = require('./api/models/userModel');
+const jwt = require('jsonwebtoken');
 
 const bodyParser = require('body-parser');
 

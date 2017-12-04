@@ -52,4 +52,11 @@ module.exports = (app) => {
 
         app.route('/api/sensors/:sensorId/temperature')
             .get(temperatures.getLastTemperatureFromSensor);
+
+    const userHandlers = require('../controllers/usersController');
+        app.route('/api/auth/register')
+            .post(userHandlers.register);
+
+        app.route('/api/auth/signin')
+            .post(userHandlers.signIn);
 };
