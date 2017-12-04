@@ -21,9 +21,20 @@ exports.register = async (req, res) => {
 
 exports.signIn = async (req, res) => {
     try {
+        const user = User.findOne({ email: req.body.email});
+        if(!user) {
+            throw new Error ('Authentication failed! No user found!');
+        } else if (user) {
+            if(!user.comparePassword(req.body.password)){
+                throw new Error('Authentication failed. Wrong password!');
+            }
+        } else {
+            const payload = { email: user.email, fullname: user.firstName + ' ' + user.lastName, _id: user._id };
+            return res.status(200).json({token: jwt.sign(payload, 'password')});
+        }
 
     } catch(err) {
-        res.status(400).send(err.message);
+        res.status(401).send(err.message);
     }
 };
 
