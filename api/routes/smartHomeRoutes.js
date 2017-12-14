@@ -57,6 +57,9 @@ module.exports = (app) => {
         app.route('/api/auth/register')
             .post(userHandlers.register);
 
-        app.route('/api/auth/signin')
+        app.route('/auth/signin')
             .post(userHandlers.signIn);
+        
+        app.route('/api/users')
+            .get(userHandlers.users);
 };

@@ -5,6 +5,9 @@ exports.allPlaces = async (req, res) => {
     
     try {
         const places = await Place.find({});
+        if(!places) {
+            throw new Error('No places found!');
+        }
         res.status(200).send(places);
     } catch (err) {
         res.status(400).send(err);

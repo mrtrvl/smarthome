@@ -29,7 +29,7 @@ exports.signIn = async (req, res) => {
                 throw new Error('Authentication failed. Wrong password!');
             } else {
                 const payload = { email: user.email, fullname: user.firstName + ' ' + user.lastName, _id: user._id };
-                return res.status(200).json({token: jwt.sign(payload, 'password')});
+                res.status(200).json({token: jwt.sign(payload, 'password', { expiresIn: 60 * 60 * 24})}); // Expires in 24 hour
             }
         } 
     } catch(err) {
@@ -48,3 +48,15 @@ exports.loginRequired = (req, res, next) => {
         res.status(400).send(err.message);
     }
 };
+
+exports.users = async (req, res) => {
+    try {
+        const users = await User.find({});
+        if (!users) {
+            throw new Error('No users found!');
+        }
+        res.status(200).json(users);
+    } catch(err) {
+        res.status(400).send(err.message);
+    }
+}
