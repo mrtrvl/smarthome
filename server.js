@@ -7,20 +7,28 @@ const Place = require('./api/models/placesModel');
 const Sensor = require('./api/models/sensorsModel');
 const Relay = require('./api/models/relaysModel');
 const Temperature = require('./api/models/temperaturesModel');
-const RelayActions = require('./api/models/relayActionsModel');
+const User = require('./api/models/userModel');
+const jwt = require('jsonwebtoken');
+const userController = require('./api/controllers/usersController');
+
+const apiRoutes = express.Router();
 
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
 
-mongoose.Promise = global.Promise;
+    next();
+}
+
+app.use(allowCrossDomain);
+
+// mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/smartHome').then(
     () => {
         console.log(`Connected to database`);
@@ -30,7 +38,29 @@ mongoose.connect('mongodb://localhost/smartHome').then(
     }
 );
 
-let routes = require('./api/routes/smartHomeRoutes');
+apiRoutes.use((req, res, next) => {
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+    if (token) {
+        jwt.verify(token, 'password', (err, decoded) => {      
+            if (err) {
+                return res.status(403).json({ success: false, message: 'Failed to authenticate token.' });    
+            } else {
+                req.decoded = decoded;    
+                next();
+            }
+        });
+    } else {
+        return res.status(403).json({ 
+            success: false, 
+            message: 'No token provided.' 
+        });     
+    }
+});
+
+const routes = require('./api/routes/smartHomeRoutes');
+
+app.use('/api', apiRoutes);
 routes(app);
 
 app.listen(port, () => {

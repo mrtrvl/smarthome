@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let PlaceSchema = new Schema ({
+const PlaceSchema = new Schema ({
     name: {
         type: String,
         required: 'Enter the new name of the place'
