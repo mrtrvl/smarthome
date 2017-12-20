@@ -18,11 +18,15 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
     next();
-});
+}
+
+app.use(allowCrossDomain);
 
 // mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/smartHome').then(
@@ -38,17 +42,16 @@ apiRoutes.use((req, res, next) => {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
     if (token) {
-        console.log(token);
-        jwt.verify(token, 'password', function(err, decoded) {      
+        jwt.verify(token, 'password', (err, decoded) => {      
             if (err) {
-                return res.json({ success: false, message: 'Failed to authenticate token.' });    
+                return res.status(403).json({ success: false, message: 'Failed to authenticate token.' });    
             } else {
                 req.decoded = decoded;    
                 next();
             }
         });
     } else {
-        return res.status(403).send({ 
+        return res.status(403).json({ 
             success: false, 
             message: 'No token provided.' 
         });     
