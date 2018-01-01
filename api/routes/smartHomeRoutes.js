@@ -62,4 +62,8 @@ module.exports = (app) => {
         
         app.route('/api/users')
             .get(userHandlers.users);
+
+        app.options('/*',function(req, res, next){ // CORS OPTIONS vastus
+            res.send(200);
+        });
 };

@@ -21,9 +21,11 @@
     "axios": "^0.17.0",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "jsonwebtoken": "^8.1.0",
-    "mongoose": "^4.12.4"
+    "mongoose": "^4.12.4",
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
     "mocha": "^4.0.1"

@@ -29,7 +29,7 @@ exports.signIn = async (req, res) => {
                 throw new Error('Authentication failed. Wrong password!');
             } else {
                 const payload = { email: user.email, fullname: user.firstName + ' ' + user.lastName, _id: user._id };
-                res.status(200).json({token: jwt.sign(payload, 'password', { expiresIn: 60 * 60 * 24})}); // Expires in 24 hour
+                res.status(200).json({token: jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24})}); // Expires in 24 hour
             }
         } 
     } catch(err) {
