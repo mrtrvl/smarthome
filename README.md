@@ -1,6 +1,25 @@
 # smarthome
 API for collecting and serving temperature data
 
+# Installation
+
+git clone https://github.com/mrtrvl/smarthome.git
+cd smarthome
+npm install
+
+change .env.example to .env
+change JWT_SECRET in .env file
+
+npm start
+
+Register new user on /auth/register
+Log in on /auth/login to get token
+
+After login 'x-access-token' with token on header is required for making HTTP requests
+
+
+# API endpoints:
+
 ## place  
   id  
   name  

@@ -71,13 +71,6 @@ apiRoutes.use((req, res, next) => {
 
 const routes = require('./api/routes/smartHomeRoutes');
 
-app.options("/*", function(req, res, next){
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,HEAD');
-    res.header('Access-Control-Allow-Headers', 'x-access-token, Content-Type, X-Requested-With');
-    res.send(200);
-  });
-
 app.use('/api', apiRoutes);
 routes(app);
 
