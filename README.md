@@ -43,41 +43,26 @@ An array with the following keys and values:
 
 Returns object of specified place
 
-### GET /api/places/:id/sensors
 
-Returns list of sensors in specified place
-[
-  {
-    "_id":"59f0a40916348c0e6d5b4ff8",
-    "name":"Elutuba",
-    "description":"1. korruse elutuba",
-    "placeId":"59f05fc439b19d097ba37712",
-    "createdDate":"2017-10-25T14:47:37.140Z",
-    "__v":0  
-  },
-  {
-    "_id":"59f0dd50aad56a1156562b41",
-    "name":"Veetoru",
-    "description":"Sissetuleva veetoru temperatuuri andur",
-    "placeId":"59f05fc439b19d097ba37712",
-    "createdDate":"2017-10-25T18:52:00.479Z",
-    "__v":0,
-  }
-]
+## Sensors rescources
 
-### GET /api/places/:id/temperatures
+### GET /api/sensors/
 
 ### GET /api/sensors/:id
 
-### GET /api/sensors/
 ### GET /api/sensors/:id/temperatures
 
-## temperatures  
+### GET /api/places/:id/sensors
+Returns list of sensors in specified place
+
+## Temperatures rescources  
+
 ### GET /api/temperatures/
 
+### GET /api/places/:id/temperatures
 
 
-## Rescources  
+# Rescources  
 https://enable-cors.org/server_expressjs.html  
 https://raspberrypi.stackexchange.com/questions/48303/install-nodejs-for-all-raspberry-pi - installing node and npm on raspberry pi  
 

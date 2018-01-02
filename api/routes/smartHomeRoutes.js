@@ -54,7 +54,7 @@ module.exports = (app) => {
             .get(temperatures.getLastTemperatureFromSensor);
 
     const userHandlers = require('../controllers/usersController');
-        app.route('/api/auth/register')
+        app.route('/auth/register')
             .post(userHandlers.register);
 
         app.route('/auth/signin')
