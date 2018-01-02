@@ -47,10 +47,13 @@ Returns object of specified place
 ## Sensors rescources
 
 ### GET /api/sensors/
+Returns list of sensors
 
 ### GET /api/sensors/:id
+Returns object of specified sensor
 
 ### GET /api/sensors/:id/temperatures
+Returns list of temperatures of specified sensor
 
 ### GET /api/places/:id/sensors
 Returns list of sensors in specified place
@@ -58,9 +61,10 @@ Returns list of sensors in specified place
 ## Temperatures rescources  
 
 ### GET /api/temperatures/
+Returns list of all temperatures (up to 100)
 
 ### GET /api/places/:id/temperatures
-
+Returns list of temperatures of specified place
 
 # Rescources  
 https://enable-cors.org/server_expressjs.html  
