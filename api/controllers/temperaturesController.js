@@ -4,7 +4,8 @@ const Temperature = mongoose.model('Temperature');
 exports.allTemperatures = async (req, res) => {
 
     try {
-        const temperatures = await Temperature.find({});
+        const count = 100;
+        const temperatures = await Temperature.find({}).sort({_id:-1}).limit(count);
         res.status(200).send(temperatures);
     } catch (err) {
         res.status(400).send(err);
