@@ -71,6 +71,11 @@ apiRoutes.use((req, res, next) => {
 
 const routes = require('./api/routes/smartHomeRoutes');
 
+app.options('/*', (req, res, next) => { // CORS OPTIONS vastus
+    res.send(200);
+    next();
+});
+
 app.use('/api', apiRoutes);
 routes(app);
 

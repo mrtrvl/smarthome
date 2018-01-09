@@ -53,6 +53,9 @@ module.exports = (app) => {
         app.route('/api/sensors/:sensorId/temperature')
             .get(temperatures.getLastTemperatureFromSensor);
 
+        app.route('/api/places/:placeId/temperatures')
+            .get(temperatures.getTemperaturesOfPlace);
+
     const userHandlers = require('../controllers/usersController');
         app.route('/auth/register')
             .post(userHandlers.register);
@@ -62,8 +65,4 @@ module.exports = (app) => {
         
         app.route('/api/users')
             .get(userHandlers.users);
-
-        app.options('/*',function(req, res, next){ // CORS OPTIONS vastus
-            res.send(200);
-        });
 };
